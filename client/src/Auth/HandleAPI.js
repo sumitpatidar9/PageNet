@@ -1,10 +1,10 @@
 import axios from "axios";
 
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const signUpUser = async ( email, password) => {
     try {
-        const response = await axios.post('http://localhost:5000/signup', {email, password}, { withCredentials: true });
+        const response = await axios.post(`${backendUrl}/signup`, {email, password}, { withCredentials: true });
         const data = await response.data;
         return data
     }
@@ -18,7 +18,7 @@ const signUpUser = async ( email, password) => {
 const logInUser = async (email, password) => {
 
     try {
-        const response = await axios.post('http://localhost:5000/login', { email, password }, { withCredentials: true });
+        const response = await axios.post(`${backendUrl}/login`, { email, password }, { withCredentials: true });
         const data = await response.data;
         return data        
     }
@@ -39,7 +39,7 @@ const logInUser = async (email, password) => {
 const checkAuthStatus = async () => {
 
     try {
-        const response = await axios.get('http://localhost:5000/auth', { withCredentials: true });
+        const response = await axios.get(`${backendUrl}/auth`, { withCredentials: true });
         const data = await response.data;
         console.log(data);
         return data;
@@ -53,7 +53,7 @@ const checkAuthStatus = async () => {
 
 const logoutUser = async () => {
     try {
-        const res = await axios.get("http://localhost:5000/logout", { withCredentials: true });
+        const res = await axios.get(`${backendUrl}/logout`, { withCredentials: true });
         const data = await res.data;
         return data;
     }
