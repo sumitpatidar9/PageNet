@@ -1,15 +1,9 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './AuthContext';
-import styles from './Login.module.css'; 
-
-
+import styles from './Login.module.css';
 
 const Login = () => {
-
-  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,15 +21,14 @@ const Login = () => {
       return;
     }
     if (!validateEmail(email)) {
-      alert('Please enter a valid email address.');
+      setError('Please enter a valid email address.');
       return;
     }
     setError('');
     try {
       await auth.login(email, password);
       navigate("/dashboard");
-    } 
-    catch (error) {
+    } catch (error) {
       console.log('Error logging in');
       setError('Invalid email or password. Please try again.');
     }
@@ -46,9 +39,6 @@ const Login = () => {
       navigate("/dashboard");
     }
   }, [auth, navigate]);
-
-
-
 
   return (
     <div className={styles.loginContainer}>

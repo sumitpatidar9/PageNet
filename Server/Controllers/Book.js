@@ -95,26 +95,6 @@ const getBooksAuth = async (req, res) => {
 };
 
 
-
-
-
-
-
-
-
-
-const getBooks = async (req, res) => {
-    try {
-        const books = await Book.find().populate("user", "email"); 
-        res.json(books);
-    } 
-    catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-};
-
-
-
 const getBookById = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id).populate("user", "email");
@@ -129,43 +109,87 @@ const getBookById = async (req, res) => {
 
 
 
-const getBookByFilter = async (req, res) => {
+
+
+const getBooks = async (req, res) => {
     try {
-        const { author, category, minRating } = req.query;
-        const filter = {};
+        let { page = 1, limit = 5, sortBy = "price", order = "asc" } = req.query;
+        page = parseInt(page);
+        limit = parseInt(limit);
+        const sortOrder = order === "desc" ? -1 : 1; 
 
-        if (author) filter.author = author;
-        if (category) filter.category = category;
+        const books = await Book.aggregate([
+            { $sort: { [sortBy]: sortOrder } },  
+            { $skip: (page - 1) * limit },       
+            { $limit: limit }                    
+        ]);
 
-        if (minRating && !isNaN(parseFloat(minRating))) {
-            filter.rating = { $gte: parseFloat(minRating) };
-        }
+        const totalBooks = await Book.countDocuments();
 
-        const books = await Book.find(filter).populate("user", "email");
-        res.json(books);
-    } 
-    
-    catch (err) {
+        res.json({
+            books,
+            totalPages: Math.ceil(totalBooks / limit),
+            currentPage: page,
+        });
+    } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
-
 
 
 
 const query = async (req, res) => {
     try {
-        const { title } = req.query;
-        if (!title) return res.status(400).json({ message: 'Title query parameter is required' });
+        const { title, page = 1, limit = 5 } = req.query;
+        if (!title) return res.status(400).json({ message: "Title query parameter is required" });
 
-        const books = await Book.find({ title: { $regex: title, $options: 'i' } }).populate("user", "email");
-        res.json(books);
-    } 
-    catch (err) {
+        const books = await Book.find({ title: { $regex: title, $options: "i" } })
+            .populate("user", "email")
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalBooks = await Book.countDocuments({ title: { $regex: title, $options: "i" } });
+
+        res.json({
+            books,
+            totalPages: Math.ceil(totalBooks / limit),
+            currentPage: parseInt(page),
+        });
+    } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
+
+const getBookByFilter = async (req, res) => {
+    try {
+        const { author, category, minRating, page = 1, limit = 5 } = req.query;
+        const filter = {};
+        const parsedPage = parseInt(page);
+        const parsedLimit = parseInt(limit);
+
+        if (author) filter.author = author;
+        if (category) filter.category = category;
+        if (minRating && !isNaN(parseFloat(minRating))) {
+            filter.rating = { $gte: parseFloat(minRating) };
+        }
+
+        const books = await Book.find(filter)
+            .populate("user", "email")
+            .skip((parsedPage - 1) * parsedLimit)
+            .limit(parsedLimit);
+
+        const totalBooks = await Book.countDocuments(filter);
+
+        res.json({
+            books,
+            totalPages: Math.ceil(totalBooks / parsedLimit),
+            currentPage: parsedPage
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 export {createBook,deleteBookById,updateBookById, getBooksAuth, getBooks, getBookById, getBookByFilter, query};

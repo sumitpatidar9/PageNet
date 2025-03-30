@@ -1,73 +1,74 @@
-
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(145deg, #e3f9e5, #c1f0d3);
-  color: #2c5f2d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-
 .loginContainer {
-  background-color: #f0fff4;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 320px;
-}
-
-
-.loginHeading {
-  margin-bottom: 1rem;
-  color: #2c5f2d;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-
-.companyTagline {
-  font-size: 1.2rem;
-  color: #2c5f2d;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-
-.loginForm {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  padding: 20px;
 }
 
+.companyTagline {
+  color: #34495e;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.loginHeading {
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.errorMessage {
+  color: #e74c3c;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loginForm {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
 .loginInput {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #2c5f2d;
-  border-radius: 10px;
-  font-size: 1rem;
+  padding: 12px;
+  border: 1px solid #d1d8e0;
+  border-radius: 6px;
+  font-size: 1em;
 }
-
-.loginInput::placeholder {
-  color: #a0bfa0;
-}
-
 
 .loginButton {
-  width: 100%;
-  padding: 10px;
-  background-color: #2c5f2d;
-  color: #f0fff4;
+  padding: 12px 20px;
+  background-color: #6c5ce7;
+  color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 1.2rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .loginButton:hover {
-  background-color: #3c7c3b;
+  background-color: #574ae2;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .companyTagline {
+    font-size: 1.5em;
+  }
+
+  .loginHeading {
+    font-size: 2em;
+  }
 }

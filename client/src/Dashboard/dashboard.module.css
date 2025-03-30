@@ -1,0 +1,172 @@
+
+
+
+.dashboardContainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #f4f7f6;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.headerSection {
+  margin-bottom: 30px;
+}
+
+.dashboardTitle {
+  text-align: center;
+  color: #34495e;
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.bookForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.bookForm input,
+.bookForm button {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d8e0;
+  font-size: 1em;
+}
+
+.bookForm button {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.bookForm button:hover {
+  background-color: #574ae2;
+  transform: translateY(-2px);
+}
+
+.booksSection {
+  flex-grow: 1;
+}
+
+.booksContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.bookCard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  height: 450px; 
+}
+
+.bookCard:hover {
+  transform: translateY(-5px);
+}
+
+.bookImage {
+  height: 150px; 
+  background-color: #e0e0e0;
+  background-image: linear-gradient(135deg, #e8e8e8, #f8f8f8);
+}
+
+.bookDetails {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookDetails h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.2em;
+}
+
+.bookDetails p {
+  color: #7f8c8d;
+  margin: 8px 0;
+  font-size: 1em;
+}
+
+.bookActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; 
+}
+
+.editButton,
+.deleteButton {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.editButton {
+  background-color: #27ae60;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  transform: translateY(-2px);
+}
+
+.editPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.editForm {
+  display: grid;
+  gap: 15px;
+}
+
+.editForm input,
+.editForm button {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d8e0;
+  font-size: 1em;
+}
+
+.editForm button[type="submit"] {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.editForm button[type="submit"]:hover {
+  background-color: #574ae2;
+  transform: translateY(-2px);
+}
