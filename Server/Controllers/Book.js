@@ -96,4 +96,76 @@ const getBooksAuth = async (req, res) => {
 
 
 
-export {createBook,deleteBookById,updateBookById, getBooksAuth};
+
+
+
+
+
+
+
+const getBooks = async (req, res) => {
+    try {
+        const books = await Book.find().populate("user", "email"); 
+        res.json(books);
+    } 
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+const getBookById = async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id).populate("user", "email");
+        if (!book) return res.status(404).json({ message: 'Book not found' });
+        res.json(book);
+    } 
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+
+const getBookByFilter = async (req, res) => {
+    try {
+        const { author, category, minRating } = req.query;
+        const filter = {};
+
+        if (author) filter.author = author;
+        if (category) filter.category = category;
+
+        if (minRating && !isNaN(parseFloat(minRating))) {
+            filter.rating = { $gte: parseFloat(minRating) };
+        }
+
+        const books = await Book.find(filter).populate("user", "email");
+        res.json(books);
+    } 
+    
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+
+const query = async (req, res) => {
+    try {
+        const { title } = req.query;
+        if (!title) return res.status(400).json({ message: 'Title query parameter is required' });
+
+        const books = await Book.find({ title: { $regex: title, $options: 'i' } }).populate("user", "email");
+        res.json(books);
+    } 
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+export {createBook,deleteBookById,updateBookById, getBooksAuth, getBooks, getBookById, getBookByFilter, query};
