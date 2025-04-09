@@ -13,7 +13,7 @@ PageNet
 
 ### **1. Clone the Repository**
 ```sh
-git clone https://github.com/your-username/PageNet.git
+git clone https://github.com/sumitpatidar9/PageNet.git
 cd PageNet
 ```
 
