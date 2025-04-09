@@ -1,10 +1,10 @@
-# Zynetic
+# PageNet
 
-Zynetic is a full-stack web application that includes a **React frontend** and a **Node.js backend** using **MongoDB** as the database.
+PageNet is a full-stack web application that includes a **React frontend** and a **Node.js backend** using **MongoDB** as the database.
 
 ## **Project Structure**
 ```
-Zynetic
+PageNet
 │── client/   # React frontend
 │── Server/   # Node.js backend
 ```
@@ -13,8 +13,8 @@ Zynetic
 
 ### **1. Clone the Repository**
 ```sh
-git clone https://github.com/your-username/Zynetic.git
-cd Zynetic
+git clone https://github.com/your-username/PageNet.git
+cd PageNet
 ```
 
 ### **2. Install Dependencies**
